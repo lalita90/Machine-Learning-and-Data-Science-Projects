@@ -95,9 +95,9 @@ dist1=sc.spatial.distance.cdist(train1_norm.iloc[:,2:], dev1.iloc[:,0:],metric='
 dist_df1=pd.DataFrame(dist1)
 
 
-#%%dev 2 (fixed for dev2)
+#%%dev 2 dataset
 #================================================================================
-dev2=norm_train.iloc[155:310,:]   #valid set part 2
+dev2=norm_train.iloc[155:310,:]   
 dev2.loc[dev2['area']>0,'area']=1
 train11_norm=norm_train.iloc[0:155,:]
 train22_norm=norm_train.iloc[310:466,:]
@@ -108,9 +108,9 @@ dist_df2=pd.DataFrame(dist2)
 trainnorm=trainnorm.reset_index()
 
 
-#%%dev 3 (fixed)
+#%%dev 3 dataset
 #=============================================================================
-dev3=norm_train.iloc[310:465,:]   #valid set part 3
+dev3=norm_train.iloc[310:465,:]   
 dev3.loc[dev3['area']>0,'area']=1
 trainnorm1=norm_train.iloc[0:310,:]
 trainnorm1=trainnorm1.reset_index()

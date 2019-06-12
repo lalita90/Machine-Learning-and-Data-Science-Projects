@@ -4,7 +4,6 @@ Created on Sun Mar  3 23:44:20 2019
 
 @author: LALITA
 """
-#https://www.python-course.eu/Decision_Trees.php
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import numpy as np
@@ -13,7 +12,7 @@ eps = np.finfo(float).eps
 from numpy import log2 as log
 import pydotplus
 import pydot
-import graphviz  #Type conda install pydot graphviz in cmd, and then add the executables location directory C:\Anaconda3\pkgs\graphviz-2.38-hfd603c8_2\Library\bin\graphviz to your system path variable. That works!
+import graphviz  
 from IPython.display import Image
 from sklearn.tree import export_graphviz
 import os
@@ -38,7 +37,7 @@ Y_train=train.iloc[:,9]
 X_test=test.iloc[:,0:9]
 Y_test=test.iloc[:,9]
 
-#%%  https://medium.com/@rakendd/decision-tree-from-scratch-9e23bcfb4928
+#%%  
 
 def find_entropy(df):
     Class = df.keys()[-1]   #To make the code generic, changing target variable class name

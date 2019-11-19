@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov 19 16:12:04 2019
+
+@author: lalita
+"""
+
+# Make your simulation here
+s = env.reset()
+
+done = False
+R = []
+while not done:
+    a = env.action_space.sample()
+        
+    s, r, done, info = env.step(a)
+    R.append(r)
+    print('state:',s,'action:',a,'reward',r,'done or not:',done)
+    #state: 4 action: 1 reward 0.0 done or not: False (Down)
+    #Always starting in state S, then taking action 1 (down), going to state 4, getting a
+    #reward of 0, indicating if the episode is terminated or not.
+    #"the ice is slippery, so you won't always move in the direction you intend."
+#     env.render()
+
+    
+# env.render()
+print(R)
+
+#Start building up the probabilities and rewards:
+policy = create_random_policy(env)
+episode = run_game(env, policy, display=False)
+#%%
+def mdp_frozenLake(env,gamma, nIt=100, policy=None, epsilon=0.01):
+    if not policy:
+        policy = create_random_policy(env)  # Create an empty dictionary to store state action values    
+    Q = create_state_action_dictionary(env, policy) # Empty dictionary for storing rewards for each state-action pair
+    returns = {} # 3.
+    G_list = []
+    Vs = [np.zeros(env.nS)] # list of value functions contains the initial value function V^{(0)}, which is zero
+    pis = []
+    for it in range(nIt):
+        Vprev = Vs[-1] # V^{(it)}
+        V = np.zeros(env.nS)
+        pi = np.zeros(env.nS)
+        for state in env.P: # for all the states in the finite MDP
+            maxv = 0 # track the max value across all the actions in the current state
+            for action in env.P[state]: # for all the actions in current state
+                v = 0
+                list_sa = env.P[state][action]  #list of all information for a state and action for it
+                for i in range(0,len(list_sa)):      
+                    probability=list_sa[i][0]
+                    reward = list_sa[i][2]
+                    nextstate = list_sa[i][1]
+                    v += probability * (reward + gamma * Vprev[nextstate])
+                weight = np.zeros(4)
+                if v > maxv: # if value is largest across all the actions, set the policy to that action
+                    maxv = v
+                    weight[0:4] = epsilon/3
+                    weight[action] = 1 - epsilon
+                    pi[state] = np.random.choice(4, 1, p=weight) #action
+            V[state] = maxv # set the value function to the max value across all the actions
+        Vs.append(V)
+        pis.append(pi)
+        for s in range(env.nS):
+            for a in range(env.nA):
+                if pis[0][s] == a:
+                    policy[s][a] = 1 - epsilon
+                else:
+                    policy[s][a] = epsilon/3
+    return policy
+#%%
+#Testing the policy
+gamma = 0.5
+policy = mdp_frozenLake(env,gamma, nIt=100000, policy=None, epsilon=0.01)
+percent_win = test_policy(policy,env)
+print('percent win =', percent_win*100,'%')

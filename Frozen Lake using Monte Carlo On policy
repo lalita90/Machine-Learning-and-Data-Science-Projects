@@ -153,3 +153,13 @@ def monte_carlo_e_soft(env,gamma, episodes=100, policy=None, epsilon=0.01):
         G_list.append(G)
         
     return policy, G_list
+
+policy,G_list = monte_carlo_e_soft(env, 0.5, episodes=100000,policy=None,epsilon=0.01)
+percent_win = test_policy(policy,env)
+print('percent win =', percent_win*100,'%')
+
+#Plot of running average
+RunningAvg = [0]
+for i in range(1,len(G_list)):
+    RunningAvg.append(sum(G_list[0:i])/len(G_list[0:i]))
+plt.plot(RunningAvg)

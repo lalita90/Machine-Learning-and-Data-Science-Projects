@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Feb  8 16:02:42 2020
+
+@author: lalita
+"""
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Feb  7 16:31:36 2020
+
+@author: lalita
+"""
+
+#import libabries
+
+import numpy as np
+from sklearn.svm import LinearSVC, SVC
+from sklearn.linear_model import LogisticRegression as LR
+import warnings
+warnings.filterwarnings("ignore")
+#%%defining function my_cross_val for CV of training dataset by splitting it in 10 equal folds
+#returns error for each folds using 3 methods and also mean and std for 10 folds using a method
+def my_cross_val(method,X,y,K):
+#    K=10
+    
+    k1 = len(X)//K
+    val_X = []
+    train_X = []
+    train_y = []
+    val_y = []
+    err = []
+   
+
+    for i in range(0,K):
+        if i==0:
+            #defining 1st val and train set for i = 0
+            val_X.append((X.iloc[i:k1,:]).values)
+           
+            val_y.append((y.iloc[i:k1,:]).values)
+            train_X.append((X.iloc[k1:,:]).values)
+#            print(train_X)
+            train_y.append((y.iloc[k1:,:]).values)
+           
+            for j in range(len(train_X)):
+                XX = train_X[j]
+                yy = train_y[j]
+                VX = val_X[j]
+                Vy = val_y[j]
+                
+#               
+            
+        else:
+            #2nd-10th val set and train set 
+            val_X.append((X.iloc[i+k1-1:i+2*k1+1,:]).values) 
+            val_y.append((y.iloc[i+k1-1:i+2*k1+1,:]).values) 
+    
+            df_X = (X.iloc[0:i+k1-1,:]).append(X.iloc[i+2*k1+1:,:])
+            df_y = (y.iloc[0:i+k1-1,:]).append(y.iloc[i+2*k1+1:,:])
+            train_X.append((df_X).values)
+            train_y.append((df_y).values)
+            for j in range(len(train_X)):
+                XX = train_X[j]
+                yy = train_y[j]
+                VX = val_X[j]
+                Vy = val_y[j]
+        method.fit(XX,yy)
+        VX_pred = method.predict(VX)
+        c = 0
+        for jj in range(len(VX_pred)):
+            if VX_pred[jj] != Vy[jj]:
+                c += 1
+        E = c/(len(Vy))
+        err.append(E)
+        mean = np.mean(err)
+        std = np.std(err)
+
+    
+    return err, mean, std
+
+
+

@@ -6,13 +6,6 @@ Created on Thu Apr 23 15:22:33 2020
 @author: lalita
 """
 
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Apr 18 13:56:37 2020
-
-@author: lalita
-"""
 
 import numpy as np
 import pandas as pd
@@ -33,8 +26,7 @@ class MySVMv1:
         z=np.ones((len(X1),1))
         X1 = np.append(X1, z, axis=1) 
 
-        # scaler = MinMaxScaler()
-        # X1 = scaler.fit_transform(X1)
+        
         y1 = np.asarray(y1)
             
         data = pd.DataFrame(np.append(X1,y1,axis=1))
@@ -59,7 +51,7 @@ class MySVMv1:
               
         for epoch in range(0, max_epochs): 
             
-            learning_rate = 0.00001 #0.0001 for b75, iter=1000, 10e3 for b50 m=40 with 0.00001
+            learning_rate = 0.00001 
                        
             distances = 1 - y1 * (np.dot(X1, weights))
                        

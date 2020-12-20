@@ -17,7 +17,7 @@ from IPython.display import Image
 from sklearn.tree import export_graphviz
 import os
 
-#%%Q1 b(i)
+#data split into train and test data
 data = pd.read_csv('hw2_question1.csv')
 class2=data.loc[data['class'] == 2]
 class4=data.loc[data['class'] == 4]
@@ -37,7 +37,7 @@ Y_train=train.iloc[:,9]
 X_test=test.iloc[:,0:9]
 Y_test=test.iloc[:,9]
 
-#%%  
+#%% calculating entropy 
 
 def find_entropy(df):
     Class = df.keys()[-1]   #To make the code generic, changing target variable class name
@@ -65,7 +65,7 @@ def find_entropy_attribute(df,attribute):
       entropy2 += -fraction2*entropy
   return abs(entropy2)
 
-   
+#finding out attribute with most information   
 def find_winner(df):
 #    Entropy_att = []
     IG = []
@@ -129,7 +129,7 @@ def predict(inst,tree):
         
     return prediction
 #%%
-# Q1 b(ii)
+
 #entropy_node for train
 #entropy_node = find_entropy(train)
 entropy_node = find_entropy(train)

@@ -7,4 +7,4 @@ With these, we can get an idea of the underlying mathematics and working fundame
 4. Multi-Gaussian Classification
 5. Decision Tree
 
-Apart from that, I have also covered data split into train and test, K-fold cross validation, 2-D convolution, binary classification using SVM, data preprocessing for LSTM for sentiment analysis, Gradient Descent, PCA, CNN etc
+Apart from that, I have also covered data split into train and test, K-fold cross validation, 2-D convolution, binary classification using SVM, data preprocessing for LSTM for sentiment analysis, Gradient Descent, PCA, CNN, Monte Carlo, Markov Decision Process etc

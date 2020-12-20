@@ -15,7 +15,6 @@ con_ai=np.convolve(F, [1,1,1])  #slightly blurred
 con_aii=np.convolve(F, [1,0,-1])    #edge detection
 #https://en.wikipedia.org/wiki/Kernel_(image_processing)
 
-#%%Q1b
 
 def filterrotate(kernel):
     kernel_copy= kernel.copy()
@@ -55,7 +54,7 @@ def convolve(image, kernel):
  
 	# return the output image
 	return output
-#%%Q1bi
+
 img=np.array([[255, 168, 200, 180, 195], 
                  [204, 189, 178, 167, 128],
                  [184, 190, 216, 250, 145],
@@ -71,7 +70,7 @@ filter=(1/16)*filter    #gaussian blur
 filter_rot=filterrotate(filter)
 #perform convolution
 img_con= convolve(img,filter_rot)
-#%%Q1bii
+
 image= np.array([[164, 188, 164, 161, 195], 
                  [178, 201, 197, 150, 137],
                  [174, 168, 181, 190, 184],

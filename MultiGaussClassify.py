@@ -1,13 +1,7 @@
 
 """
-Created on Thu Mar  5 21:11:19 2020
-
-
 #Created on Tue Mar  3 15:10:17 2020
-
 #@author: lalita
-
-#https://machinelearningmastery.com/naive-bayes-classifier-scratch-python/
 """
 import numpy as np
 import pandas as pd
@@ -94,9 +88,7 @@ class MultiGaussClassify:
         self.cov = []
         mu_x = []
         l = []
-        #    df = X.drop(X.shape[1]-1,axis=1)
-#        mux  = mean_sub_data(X1,y1)
-#        d = X1.shape[1]
+      
         mux_prod = np.zeros((self.d,self.d))
 #        sep = separate_by_class(X1,y1)
         for i in range(self.k):
@@ -150,12 +142,6 @@ class MultiGaussClassify:
         #==================================================
         #discriminant function
         sum1=[]
-#        _,icov,det_cov = covar(X1,y1,False)
-#        sep = separate_by_class(X1,y1)
-#        mean = mean1(X1,y1)
-        
-#        P_c = class_prob(X1,y1)
-#        d = X1.shape[1]
         
         for i in range(self.k):
             for n in range(len(sep[i])):
@@ -178,12 +164,7 @@ class MultiGaussClassify:
 
     def predict(self,X1):
         sum1_p=[]
-#        _,icov,det_cov = covar(X1,y1,diag)
-    #    sep = separate_by_class(X1,y1)
-#        mean = mean1(X1,y1)
-#        G_i = []
-#        P_c = class_prob(X1,y1)
-#        d = X1.shape[1]
+
         for n in range(len(X1)):
             for i in range(self.k):
             

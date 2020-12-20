@@ -289,11 +289,7 @@ for i in range(0,33):
     if (yTest.iloc[i,0]==yTest_Pred[i]):
         count1=count1+1
 accuracy_knn=(count1/33)*100    #upto 85%
-#10 components=87.87
-#20=84.84
-#30=81.8181
-#40=72.72
-#50=69.69
+
 #%%
 
 train_data=[]
@@ -339,7 +335,7 @@ model.add(Dense(16, activation = 'softmax'))
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 model.fit(np.array(x_train).reshape(132,1,120,160),np.array(y_train),epochs=20,verbose=1, validation_data=(np.array(x_test).reshape(33,1,120,160), np.array(y_test)))
 score = model.evaluate(np.array(x_test).reshape(33,1,120,160), np.array(y_test), verbose=0)
-#%%Q2 d
+#%%
 n_components=[1,10,20,30,40,50]
 for i in n_components:
     pca = PCA(i)

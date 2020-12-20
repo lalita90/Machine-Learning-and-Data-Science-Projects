@@ -12,7 +12,7 @@ from sklearn.model_selection import cross_val_score
 import time
 
 
-#%%Q2 (a)
+#%%
 
 data1 = pd.read_csv('hw2_question3.csv')
 
@@ -26,35 +26,35 @@ data1.loc[data1.f2 ==1, 'f2_+1'] = 1
 data1.insert(10, "f7_-1", 0) 
 data1.insert(11, "f7_0", 0) 
 data1.insert(12, "f7_+1", 0) 
-data1.loc[data1.f7 ==-1, 'f7_-1'] = 1   #df.loc[df.column_name condition, 'new column name'] = 'value if condition is met'
+data1.loc[data1.f7 ==-1, 'f7_-1'] = 1   
 data1.loc[data1.f7 ==0, 'f7_0'] = 1   
 data1.loc[data1.f7 ==1, 'f7_+1'] = 1   
 
 data1.insert(14, "f8_-1", 0) 
 data1.insert(15, "f8_0", 0) 
 data1.insert(16, "f8_+1", 0) 
-data1.loc[data1.f8 ==-1, 'f8_-1'] = 1   #df.loc[df.column_name condition, 'new column name'] = 'value if condition is met'
+data1.loc[data1.f8 ==-1, 'f8_-1'] = 1   
 data1.loc[data1.f8 ==0, 'f8_0'] = 1   
 data1.loc[data1.f8 ==1, 'f8_+1'] = 1 
 
 data1.insert(23, "f14_-1", 0) 
 data1.insert(24, "f14_0", 0) 
 data1.insert(25, "f14_+1", 0) 
-data1.loc[data1.f14 ==-1, 'f14_-1'] = 1   #df.loc[df.column_name condition, 'new column name'] = 'value if condition is met'
+data1.loc[data1.f14 ==-1, 'f14_-1'] = 1   
 data1.loc[data1.f14 ==0, 'f14_0'] = 1   
 data1.loc[data1.f14 ==1, 'f14_+1'] = 1 
 
 data1.insert(27, "f15_-1", 0) 
 data1.insert(28, "f15_0", 0) 
 data1.insert(29, "f15_+1", 0) 
-data1.loc[data1.f15 ==-1, 'f15_-1'] = 1   #df.loc[df.column_name condition, 'new column name'] = 'value if condition is met'
+data1.loc[data1.f15 ==-1, 'f15_-1'] = 1   
 data1.loc[data1.f15 ==0, 'f15_0'] = 1   
 data1.loc[data1.f15 ==1, 'f15_+1'] = 1 
 
 data1.insert(31, "f16_-1", 0) 
 data1.insert(32, "f16_0", 0) 
 data1.insert(33, "f16_+1", 0) 
-data1.loc[data1.f16 ==-1, 'f16_-1'] = 1   #df.loc[df.column_name condition, 'new column name'] = 'value if condition is met'
+data1.loc[data1.f16 ==-1, 'f16_-1'] = 1   
 data1.loc[data1.f16 ==0, 'f16_0'] = 1   
 data1.loc[data1.f16 ==1, 'f16_+1'] = 1 
 
@@ -62,7 +62,7 @@ data1.loc[data1.f16 ==1, 'f16_+1'] = 1
 data1.insert(44, "f26_-1", 0) 
 data1.insert(45, "f26_0", 0) 
 data1.insert(46, "f26_+1", 0) 
-data1.loc[data1.f26 ==-1, 'f26_-1'] = 1   #df.loc[df.column_name condition, 'new column name'] = 'value if condition is met'
+data1.loc[data1.f26 ==-1, 'f26_-1'] = 1   
 data1.loc[data1.f26 ==0, 'f26_0'] = 1   
 data1.loc[data1.f26 ==1, 'f26_+1'] = 1 
 
@@ -70,7 +70,7 @@ data1.loc[data1.f26 ==1, 'f26_+1'] = 1
 data1.insert(50, "f29_-1", 0) 
 data1.insert(51, "f29_0", 0) 
 data1.insert(52, "f29_+1", 0) 
-data1.loc[data1.f29 ==-1, 'f29_-1'] = 1   #df.loc[df.column_name condition, 'new column name'] = 'value if condition is met'
+data1.loc[data1.f29 ==-1, 'f29_-1'] = 1   
 data1.loc[data1.f29 ==0, 'f29_0'] = 1   
 data1.loc[data1.f29 ==1, 'f29_+1'] = 1 
 
@@ -97,9 +97,8 @@ y_train=train.iloc[:,46]
 test=pd.concat([class0_2,class1_2],ignore_index=True)
 X_test=test.iloc[:,0:46]
 y_test=test.iloc[:,46]
-#%% Q2(b) Linear SVM
+#%% Linear SVM
 
-#import time
 start = time.time()
 scores=[]
 mean_score1=[]
@@ -113,14 +112,14 @@ clf = svm.SVC(kernel='linear', C=best_C).fit(X_train, y_train)
 #test_score=clf.score(X_test, y_test) 
 
 end = time.time()
-train_time1=(end - start) #334.598 sec
+train_time1=(end - start)
 
 start_test1 = time.time()
 test_score1=clf.score(X_test, y_test)
 end_test1 = time.time()
 test1_time=end_test1-start_test1
 
-#%% Q2(c) kernel SVM
+#%%kernel SVM
 #poly kernel
 
 start = time.time()
@@ -135,7 +134,7 @@ best_C=np.argmax(mean_score2)
 
 
 
-clf = svm.SVC(kernel='poly',degree=8, C=best_C).fit(X_train, y_train)  #168.32888 sec
+clf = svm.SVC(kernel='poly',degree=8, C=best_C).fit(X_train, y_train)  
 end = time.time()
 train_time2=(end - start)
 
@@ -158,7 +157,7 @@ best_C=np.argmax(mean_score3) #giving index of best C
 
 
 
-clf = svm.SVC(kernel='rbf',C=best_C).fit(X_train, y_train)  #81.9058530330658 sec
+clf = svm.SVC(kernel='rbf',C=best_C).fit(X_train, y_train)  
 end = time.time()
 train_time3=(end - start)
 start_test3 = time.time()

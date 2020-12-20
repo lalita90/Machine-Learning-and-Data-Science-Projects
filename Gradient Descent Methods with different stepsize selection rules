@@ -5,17 +5,14 @@ Created on Sun Sep 29 10:00:53 2019
 
 @author: lalita
 """
-#Generation of data as per given MATLAB script
 import numpy as np
 import time
 import matplotlib.pyplot as plt
-#problem dimension 
 
 n=50
 #condition number
 c=1000
 #gnerating data matrix Q
-#np.random.seed(2)
 A=np.random.randn(n,n)
 u, s, vh = np.linalg.svd(A, full_matrices=True)
 s_diag=np.diag(s)
@@ -45,7 +42,7 @@ def func(x):
 def dfunc(x):
     df = Q.dot(x.reshape(n,1))+b
     return (df)
-#%%Q3.1
+#%%
 #Armijo Stepsize Selection Algorithm
 def armijo(old,beta, sigma,niters):
     
@@ -80,10 +77,9 @@ for i in range(0,len(leftf)):
         index.append(i)
 #final step size where Steepest descent converges
 stepsize= 0.25**(index[0])   
-#beta = 0.25
-#sigma = 0.25
+
 S = 1
-#S=1
+
 #new value of x for step size selected by Armijo rule
 x_new = old+(0.25**(index[0]))*S*(-dfunc(old))
 t2_armijo=time.time()
@@ -122,7 +118,7 @@ plt.show()
     
 
 #
-#%%Q3.2  Diagonal Scaling Gradient Descent
+#%%Diagonal Scaling Gradient Descent
 #Hessian of our cost function is Q
 t1_DS=time.time()
 Hess = Q
@@ -133,7 +129,6 @@ hess_inv = np.linalg.inv(Q)
 #first order derivative of function
 df = dfunc(x)
 #range of constant step sizes
-#s_d =np.arange(0.001,1000,0.001)     #constant step sizes' range                #0.001 true
 s_d = np.arange(0.1,1000,0.1)
 x_new_diagscal = []
 step=[]
@@ -173,7 +168,7 @@ plt.xlabel('iteration')
 plt.ylabel('time')
 plt.show()    
 
-#%% Q3.3 new CG
+#%%new CG
 t1_CG=time.time()
 x0=x
 g0=dfunc(x0)

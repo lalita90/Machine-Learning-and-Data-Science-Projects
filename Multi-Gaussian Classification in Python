@@ -9,8 +9,6 @@ import pandas as pd
 from numpy import linalg as LA
 
 #%%
-
-#create instance MG=classname(2,13); MG.fit(x,y,false)
 class MultiGaussClassify:
     def __init__(self,k,d):
         self.k = k #no of classes
@@ -39,7 +37,6 @@ class MultiGaussClassify:
             
         #=======================================    
         #class probability
-#        sep_data = separate_by_class(X1,y1)
         l = []
         self.P_c = []
         self.k = len(sep)
